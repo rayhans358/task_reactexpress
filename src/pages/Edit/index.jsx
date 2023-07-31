@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import Input from "../../components/Input";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editProducts, getProductsId } from "../../app/features/counter/actions";
+import { editProducts, getProductsId } from "../../app/features/products/actions";
 
 const Edit = () => {
   const {id} = useParams();

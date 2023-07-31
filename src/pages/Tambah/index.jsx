@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Input from '../../components/Input';
 import './index.scss';
 import { useState } from 'react';
-import { addProducts } from '../../app/features/counter/actions';
+import { addProducts } from '../../app/features/products/actions';
 
 const Tambah = () => {
   const dispatch = useDispatch();

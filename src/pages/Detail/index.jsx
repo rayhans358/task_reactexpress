@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import './index.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getProductsId } from "../../app/features/counter/actions";
+import { getProductsId } from "../../app/features/products/actions";
 
 const Detail = () => {
   const { id } = useParams();
@@ -40,7 +40,7 @@ const Detail = () => {
             </tr>
             <tr>
               <td>Gambar</td>
-              <td>: <img src={state.product.image_url} alt="productImage" height={75} /></td>
+              <td>: <img src={state.product.image_url} alt="Products" height={75} /></td>
             </tr>
           </tbody>
         </table>

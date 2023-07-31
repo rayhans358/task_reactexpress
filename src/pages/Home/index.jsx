@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './index.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { deleteProducts, fetchProducts } from '../../app/features/counter/actions';
+import { deleteProducts, fetchProducts } from '../../app/features/products/actions';
 
 const Home = () => {
   const dispatch = useDispatch();

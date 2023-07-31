@@ -1,5 +1,5 @@
 import axios from "axios";
-import * as counter from "./constans.jsx";
+import * as counter from "./constans";
 
 export const fetchProductsRequest = () => {
   return {
