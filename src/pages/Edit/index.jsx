@@ -10,9 +10,11 @@ const Edit = () => {
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
   const [status, setStatus] = useState(false);
-  const [image, seImage] = useState(null);
+  const [image, setImage] = useState(null);
   const dispatch = useDispatch();
-  const product = useSelector((state) => state.product);
+  const product = useSelector((state) => state.products);
+  const loading = useSelector((state) => state.loading);
+  const errors = useSelector((state) => state.error);
   const state = useSelector((state) => state);
 
   useEffect(() => {
@@ -39,6 +41,7 @@ const Edit = () => {
     dispatch(editProducts(id, formData));
     if (state.error === '') {
       alert("Data succes to change")
+      window.location.href = "/";
     };
   };
 
@@ -46,8 +49,12 @@ const Edit = () => {
     dispatch(getProductsId(id))
   }, [dispatch, id]);
 
-  if (!product) {
-    return <div>Product loading</div>
+  if (loading) {
+    return <div>Product edit is loading</div>;
+  } else if (errors) {
+    return <div>Error: {state.error}</div>;
+  } else if (!product) {
+    return <div>Product not found</div>;
   } else {
     return (
       <div className="main">
@@ -58,7 +65,7 @@ const Edit = () => {
             <Input name="name" type="text" placeholder="Nama Produk..." label="Nama" value={name} onChange={(event) => setName (event.target.value)}/>
             <Input name="price" type="number" placeholder="Harga Produk..." label="Harga" value={price} onChange={(event) => setPrice (event.target.value)}/>
             <Input name="Stock" type="number" placeholder="Stock Produk..." label="Stock" value={stock} onChange={(event) => setStock (event.target.value)}/>
-            <Input name="image" type="file" accept="image/*" onChange={(event) => seImage (event.target.files[0])} />
+            <Input name="image" type="file" accept="image/*" onChange={(event) => setImage (event.target.files[0])} />
             <Input name="status" type="checkbox" label="Active" checked={status} onChange={(event) => setStatus (event.target.checked)}/>
             <button type="submit" className="btn btn-primary">Simpan</button>
           </form>

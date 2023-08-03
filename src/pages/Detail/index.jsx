@@ -13,8 +13,12 @@ const Detail = () => {
     dispatch(getProductsId(id));
   }, [dispatch, id]);
 
-  if (!state.product) {
-    return <div>Product is loading</div>
+  if (state.loading) {
+    return <div>Product detail is loading</div>;
+  } else if (state.error) {
+    return <div>Error: {state.error}</div>;
+  } else if (!state.products) {
+    return <div>Product not found</div>;
   } else {
     return (
       <div className="main">
@@ -24,23 +28,23 @@ const Detail = () => {
           <tbody>
             <tr>
               <td>ID</td>
-              <td>: {state.product._id}</td>
+              <td>: {state.products._id}</td>
             </tr>
             <tr>
               <td>Name</td>
-              <td>: {state.product.name}</td>
+              <td>: {state.products.name}</td>
             </tr>
             <tr>
               <td>Price</td>
-              <td>: Rp. {state.product.price}</td>
+              <td>: Rp. {state.products.price}</td>
             </tr>
             <tr>
               <td>Stock</td>
-              <td>: {state.product.stock}</td>
+              <td>: {state.products.stock}</td>
             </tr>
             <tr>
               <td>Gambar</td>
-              <td>: <img src={state.product.image_url} alt="Products" height={75} /></td>
+              <td>: <img src={state.products.image_url} alt="Products" height={75} /></td>
             </tr>
           </tbody>
         </table>

@@ -17,22 +17,20 @@ export const fetchProductsSuccess = (products) => {
 export const fetchProductsFailure = (error) => {
   return {
     type: counter.FETCH_PRODUCTS_FAILURE,
-    error
+    payload: error
   }
 };
 
 export const fetchProducts = (search) => {
   return(dispatch) => {
     dispatch(fetchProductsRequest())
-    setTimeout(() => {
-      axios.get(`http://localhost:3000/api/v4/product?search=${search}`)
-        .then((res) => {
-          dispatch(fetchProductsSuccess(res.data))
-        })
-        .catch((err) => {
-          dispatch(fetchProductsFailure(err.message))
-        })
-    }, 1500);
+    axios.get(`http://localhost:3000/api/v4/product?search=${search}`)
+      .then((response) => {
+        dispatch(fetchProductsSuccess(response.data))
+      })
+      .catch((error) => {
+        dispatch(fetchProductsFailure(error.message))
+      })
   }
 };
 
@@ -52,7 +50,7 @@ export const getProductsIdSuccess = (products) => {
 export const getProductsIdFailure = (error) => {
   return {
     type: counter.GET_PRODUCTS_ID_FAILURE,
-    error
+    payload: error
   }
 };
 
@@ -60,11 +58,11 @@ export const getProductsId = (id) => {
   return(dispatch) => {
     dispatch(getProductsIdRequest())
     axios.get(`http://localhost:3000/api/v4/product/${id}`)
-      .then((res) => {
-        dispatch(getProductsIdSuccess(res.data))
+      .then((response) => {
+        dispatch(getProductsIdSuccess(response.data))
       })
-      .catch((err) => {
-        dispatch(getProductsIdFailure(err.message))
+      .catch((error) => {
+        dispatch(getProductsIdFailure(error.message))
       })
   }
 };
@@ -85,7 +83,7 @@ export const addProductsSuccess = (products) => {
 export const addProductsFailure = (error) => {
   return {
     type: counter.ADD_PRODUCTS_FAILURE,
-    error
+    payload: error
   }
 };
 
@@ -93,11 +91,11 @@ export const addProducts = (products) => {
   return(dispatch) => {
     dispatch(addProductsRequest())
     axios.post("http://localhost:3000/api/v4/product", products)
-      .then((res) => {
-        dispatch(addProductsSuccess(res.data))
+      .then((response) => {
+        dispatch(addProductsSuccess(response.data))
       })
-      .catch((err) => {
-        dispatch(addProductsFailure(err.message))
+      .catch((error) => {
+        dispatch(addProductsFailure(error.message))
       })
   }
 };
@@ -118,52 +116,52 @@ export const editProductsSuccess = (products) => {
 export const editProductsFailure = (error) => {
   return {
     type: counter.EDIT_PRODUCTS_FAILURE,
-    error
+    payload: error
   }
 };
 
 export const editProducts = (id, data) => {
   return(dispatch) => {
     dispatch(editProductsRequest())
-    axios.put(`http://localhost:3000/api/v4/product${id}`, data)
-      .then((res) => {
-        dispatch(editProductsSuccess(res.data))
+    axios.put(`http://localhost:3000/api/v4/product/${id}`, data)
+      .then((response) => {
+        dispatch(editProductsSuccess(response.data))
       })
-      .catch((err) => {
-        dispatch(editProductsFailure(err.message))
+      .catch((error) => {
+        dispatch(editProductsFailure(error.message))
       })
   }
 };
 
-export const deleteProductRequest = () => {
+export const deleteProductsRequest = () => {
   return {
     type: counter.DELETE_PRODUCTS_REQUEST
   }
 };
 
-export const deleteProductSuccess = (products) => {
+export const deleteProductsSuccess = (products) => {
   return {
     type: counter.DELETE_PRODUCTS_SUCCESS,
     payload: products
   }
 };
 
-export const deleteProductFailure = (error) => {
+export const deleteProductsFailure = (error) => {
   return {
     type: counter.DELETE_PRODUCTS_FAILURE,
-    error
+    payload: error
   }
 };
 
 export const deleteProducts = (productsId) => {
   return(dispatch) => {
-    dispatch(deleteProductRequest())
+    dispatch(deleteProductsRequest())
     axios.delete(`http://localhost:3000/api/v4/product/${productsId}`)
-      .then((res) => {
-        dispatch(deleteProductSuccess(res.data))
+      .then((response) => {
+        dispatch(deleteProductsSuccess(response.data))
       })
-      .catch((err) => {
-        dispatch(deleteProductFailure(err.message))
+      .catch((error) => {
+        dispatch(deleteProductsFailure(error.message))
       })
   }
 };
